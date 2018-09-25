@@ -1,5 +1,5 @@
 {
-    "name": "captbaritone/mailcatcher-codeception-module",
+    "name": "robiasto/codeception-maildev-module",
     "description": "Test emails in your Codeception acceptance tests",
     "authors": [
         {
