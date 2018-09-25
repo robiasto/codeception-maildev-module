@@ -6,7 +6,7 @@ use Codeception\Module;
 use Codeception\Util\Email;
 use GuzzleHttp\Client;
 
-class MailCatcher extends Module
+class MailDev extends Module
 {
     /**
      * @var Client
