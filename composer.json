@@ -5,7 +5,12 @@
         {
             "name": "Jordan Eldredge",
             "email": "jordan@jordaneldredge.com"
+        },
+        {
+            "name": "Tobias Roß",
+            "email": "tobias.ross@audicon.net"
         }
+
     ],
     "require": {
         "php": ">=7.0",
@@ -18,7 +23,6 @@
         }
     },
     "require-dev": {
-        "phpmailer/phpmailer": "^5.2"
     },
     "suggest": {
         "php-mime-mail-parser/php-mime-mail-parser": "^2.9"
