@@ -8,9 +8,9 @@ actor: AcceptanceTester
 modules:
     enabled:
         - \Helper\Acceptance
-        - MailCatcher
+        - MailDev
         - Asserts
     config:
-      MailCatcher:
+      MailDev:
         url: 'http://localhost'
         port: '1080'

@@ -72,6 +72,6 @@ class Email
 
     public static function createFromMailcatcherData($data)
     {
-        return new self($data['id'], $data['recipients'], $data['subject'], $data['source']);
+        return new self($data['id'], $data['to'], $data['subject'], $data['text']);
     }
 }

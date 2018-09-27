@@ -49,7 +49,7 @@ class MailDev extends Module
      **/
     public function resetEmails()
     {
-        $this->mailcatcher->delete('/messages');
+        $this->mailcatcher->delete('/email/all');
     }
 
 
@@ -181,9 +181,7 @@ class MailDev extends Module
         if (empty($messages)) {
             $this->fail("No messages received");
         }
-
         $last = array_shift($messages);
-
         return $this->emailFromId($last['id']);
     }
 
@@ -200,13 +198,12 @@ class MailDev extends Module
         }
 
         foreach ($messages as $message) {
-            foreach ($message['recipients'] as $recipient) {
-                if (strpos($recipient, $address) !== false) {
+            foreach ($message['to'] as $recipient) {
+                if (strpos($recipient['address'], $address) !== false) {
                     $ids[] = $message['id'];
                 }
             }
         }
-
         if (count($ids) === 0) {
             $this->fail("No messages sent to {$address}");
         }
@@ -334,13 +331,13 @@ class MailDev extends Module
      **/
     protected function messages()
     {
-        $response = $this->mailcatcher->get('/messages');
+        $response = $this->mailcatcher->get('/email');
         $messages = json_decode($response->getBody(), true);
         // Ensure messages are shown in the order they were recieved
         // https://github.com/sj26/mailcatcher/pull/184
         usort($messages, function ($messageA, $messageB) {
-            $sortKeyA = $messageA['created_at'] . $messageA['id'];
-            $sortKeyB = $messageB['created_at'] . $messageB['id'];
+            $sortKeyA = $messageA['time'] . $messageA['id'];
+            $sortKeyB = $messageB['time'] . $messageB['id'];
             return ($sortKeyA > $sortKeyB) ? -1 : 1;
         });
         return $messages;
@@ -352,7 +349,7 @@ class MailDev extends Module
      */
     protected function emailFromId($id)
     {
-        $response = $this->mailcatcher->get("/messages/{$id}.json");
+        $response = $this->mailcatcher->get("/email/{$id}");
         $messageData = json_decode($response->getBody(), true);
         $messageData['source'] = quoted_printable_decode($messageData['source']);
 

@@ -12,6 +12,7 @@ class Acceptance extends \Codeception\Module
         $phpmailer->isSMTP();
         $phpmailer->Host = '127.0.0.1';
         $phpmailer->Port = 1025;
+        $phpmailer->SMTPAutoTLS = false;
 
         $phpmailer->addAddress($to);
         $phpmailer->Subject = $subject;
