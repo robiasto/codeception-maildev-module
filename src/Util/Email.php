@@ -72,7 +72,7 @@ class Email
 
     public static function createFromMailcatcherData($data)
     {
-        $source = $data['text'] ? $data['text'] : '';
+        $source = isset($data['text']) ? $data['text'] : '';
         $source .= isset($data['html']) ? $data['html'] : '';
         return new self($data['id'], $data['to'], $data['subject'], $source);
     }
