@@ -277,32 +277,35 @@ class MailDev extends Module
         return $matches[0];
     }
 
+     /**
+     * Grab Urls From Email to address
+     *
+     * Return the urls the email conteins
+     *
+     * @param string $address
+     * @return array
+     * @author Tobias Roß <robisato@gmail.com>
+     */
+    public function grabUrlsFromLastEmailTo($address)
+    {
+        $email = $this->lastMessageFrom($address);
+        preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $email->getSource(), $text_matches);
+        return $text_matches[0];
+    }
+
     /**
      * Grab Urls From Email
      *
      * Return the urls the email conteins
      *
      * @return array
-     * @author Marcelo Briones <ing@marcelobriones.com.ar>
+     * @author Tobias Roß <robisato@gmail.com>
      */
     public function grabUrlsFromLastEmail()
     {
-        if (!class_exists('\\PhpMimeMailParser\\Parser')) {
-            throw new \Exception("'php-mime-mail-parser/php-mime-mail-parser' required for 'grabUrlsFromLastEmail' method.");
-        }
-
         $email = $this->lastMessage();
-
-        $parser = new \PhpMimeMailParser\Parser();
-        $parser->setText($email->getSource());
-
-        $text = $parser->getMessageBody('text');
-        preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $text_matches);
-
-        $html = $parser->getMessageBody('html');
-        preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $html, $html_matches);
-
-        return array_merge($text_matches[0], $html_matches[0]);
+        preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $email->getSource(), $text_matches);
+        return $text_matches[0];
     }
 
     /**
