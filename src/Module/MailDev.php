@@ -289,7 +289,7 @@ class MailDev extends Module
     public function grabUrlsFromLastEmailTo($address)
     {
         $email = $this->lastMessageFrom($address);
-        preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $email->getSource(), $text_matches);
+        preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $email->getSource(), $text_matches);
         return $text_matches[0];
     }
 
@@ -304,7 +304,7 @@ class MailDev extends Module
     public function grabUrlsFromLastEmail()
     {
         $email = $this->lastMessage();
-        preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $email->getSource(), $text_matches);
+        preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $email->getSource(), $text_matches);
         return $text_matches[0];
     }
 
