@@ -1,6 +1,7 @@
 {
     "name": "robiasto/codeception-maildev-module",
     "description": "Test emails in your Codeception acceptance tests",
+    "license": "MIT",
     "authors": [
         {
             "name": "Jordan Eldredge",
@@ -9,6 +10,10 @@
         {
             "name": "Tobias Roß",
             "email": "tobias.ross@audicon.net"
+        },
+        {
+            "name": "Marc Bastian Heinrichs",
+            "email": "mbh@mbh-software.de"
         }
 
     ],
