@@ -18,9 +18,9 @@ class EmailTest extends \Codeception\Test\Unit
     {
         $email = Email::createFromMailcatcherData([
             'id' => 1,
-            'recipients' => ['some@email.com'],
+            'to' => ['some@email.com'],
             'subject' => 'Some subject',
-            'source' => 'Source body'
+            'text' => 'Source body'
         ]);
 
         $this->assertEquals(1, $email->getId());
