@@ -28,13 +28,14 @@
         }
     },
     "require-dev": {
-        "phpmailer/phpmailer": "^5.2"
+        "phpmailer/phpmailer": "^6.5"
     },
     "suggest": {
-        "php-mime-mail-parser/php-mime-mail-parser": "^6.0",
         "codeception/module-asserts": "^1.2"
     },
     "config": {
+        "vendor-dir": "build/vendor",
+        "bin-dir": "build/bin",
         "platform": {
             "php": "7.4.10"
         }
