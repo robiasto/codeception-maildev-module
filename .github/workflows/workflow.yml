@@ -22,6 +22,11 @@ jobs:
           # This job will be running on php7.4 version
           php-version: '7.4'
 
+      - name: "Install node"
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
       # We need to install composer.phar first in the system
       - name: Install composer
         run: curl --show-error --silent https://getcomposer.org/installer | php
@@ -33,3 +38,13 @@ jobs:
       # Now run the PHPUnit tests
       - name: Run PHPUnit tests
         run: php build/bin/codecept run unit
+
+      - name: Install maildev
+        run: npm install -g maildev
+
+      - name: Run maildev
+        run: maildev -v --ip 0.0.0.0 --hide-extensions STARTTLS &
+
+      # Now run the Acceptance tests
+      - name: Run Acceptance tests
+        run: php build/bin/codecept run acceptance
