@@ -1,4 +1,4 @@
-name: Basic-CI
+name: CI
 
 on: [push, pull_request]
 
@@ -14,17 +14,15 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
+          tools: composer:v2
 
       - name: "Install node"
         uses: actions/setup-node@v2
         with:
           node-version: '14'
 
-      - name: Install composer
-        run: curl --show-error --silent https://getcomposer.org/installer | php
-
       - name: Install composer dependencies
-        run: php composer.phar install --prefer-dist --no-progress
+        run: composer install --prefer-dist --no-progress
 
       - name: Run PHPUnit tests
         run: php build/bin/codecept run unit
