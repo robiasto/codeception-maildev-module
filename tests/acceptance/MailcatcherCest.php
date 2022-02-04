@@ -135,15 +135,10 @@ class MailcatcherCest
         \Codeception\Example $example
     )
     {
-        if (!class_exists('\\PhpMimeMailParser\\Parser')) {
-            $scenario->skip('Mailparser not installed');
-        }
-
         $user = "user@example.com";
         $I->sendEmail($user, 'Email with urls', "I'm in $example[0] .");
         $urls = $I->grabUrlsFromLastEmail();
 
-        //$example[0] = str_replace('=3D', '=', $example[0]); // due to Quoted Printable Encoding
         $I->assertEquals($example[0], $urls[0]);
     }
 }
