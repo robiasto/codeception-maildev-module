@@ -20,7 +20,8 @@
     "require": {
         "php": "^7.4",
         "guzzlehttp/guzzle": "^6.0",
-        "codeception/codeception": "^2.2 || ^3.0 || ^4.0"
+        "codeception/codeception": "^4.0",
+        "codeception/module-asserts": "^1.2"
     },
     "autoload": {
         "psr-4": {
@@ -31,7 +32,7 @@
         "phpmailer/phpmailer": "^6.5"
     },
     "suggest": {
-        "codeception/module-asserts": "^1.2"
+
     },
     "config": {
         "vendor-dir": "build/vendor",
