@@ -1,25 +1,18 @@
-# Name of the workflow
 name: Basic-CI
 
-# When someone will push or make PR to this repository, this workflow will start
 on: [push, pull_request]
 
 jobs:
   tests:
 
-    # This workflow task will run on Ubuntu machine
     runs-on: ubuntu-latest
 
-    # Steps that should be performed to check whether tests task was successful or not
     steps:
-      - name: "Checkout latest revision"
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-        # We are using shivammathur/setup-php@v1 public GitHub actions for keeping things easier
       - name: "Install PHP with extensions"
-        uses: shivammathur/setup-php@v1
+        uses: shivammathur/setup-php@v2
         with:
-          # This job will be running on php7.4 version
           php-version: '7.4'
 
       - name: "Install node"
@@ -27,15 +20,12 @@ jobs:
         with:
           node-version: '14'
 
-      # We need to install composer.phar first in the system
       - name: Install composer
         run: curl --show-error --silent https://getcomposer.org/installer | php
 
-      # Run composer to install all dependencies
       - name: Install composer dependencies
-        run: php composer.phar install
+        run: php composer.phar install --prefer-dist --no-progress
 
-      # Now run the PHPUnit tests
       - name: Run PHPUnit tests
         run: php build/bin/codecept run unit
 
@@ -45,6 +35,5 @@ jobs:
       - name: Run maildev
         run: maildev -v --ip 0.0.0.0 --hide-extensions STARTTLS &
 
-      # Now run the Acceptance tests
       - name: Run Acceptance tests
         run: php build/bin/codecept run acceptance
