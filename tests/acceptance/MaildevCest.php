@@ -1,6 +1,6 @@
 <?php
 
-class MailcatcherCest
+class MaildevCest
 {
     public function _before(AcceptanceTester $I) {
         // Clear old emails from MailCatcher
